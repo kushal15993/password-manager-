@@ -101,7 +101,6 @@ def search():
     else:
         passwords = Password.query.all()
     return render_template('index.html', passwords=passwords, search_query=query)
-
 import os
 
 if __name__ == '__main__':
