@@ -48,6 +48,9 @@ with app.app_context():
 def index():
     passwords = Password.query.all()
     return render_template('index.html', passwords=passwords)
+    @app.route('/test')
+def test():
+    return "Working!"
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_password():
