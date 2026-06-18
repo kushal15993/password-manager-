@@ -1,0 +1,29 @@
+# Environment
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# Database and secrets
+database.db
+secret.key
+*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Flask
+instance/
+.webassets-cache
+
+# Environment variables
+.env
+.env.local

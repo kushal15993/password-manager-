@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Password Manager{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Your Passwords</h2>
+    
+    <div class="search-box">
+        <form method="GET" action="{{ url_for('search') }}" style="display: flex; gap: 10px; width: 100%;">
+            <input type="text" name="q" placeholder="Search by website or username..." value="{{ search_query or '' }}">
+            <button type="submit" class="btn">Search</button>
+            {% if search_query %}
+                <a href="{{ url_for('index') }}" class="btn btn-secondary">Clear</a>
+            {% endif %}
+        </form>
+    </div>
+
+    {% if passwords %}
+        <table class="password-table">
+            <thead>
+                <tr>
+                    <th>Website</th>
+                    <th>Username</th>
+                    <th>Date Added</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for password in passwords %}
+                    <tr>
+                        <td><strong>{{ password.website }}</strong></td>
+                        <td>{{ password.username }}</td>
+                        <td>{{ password.date_created.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <a href="{{ url_for('view_password', id=password.id) }}" class="btn">View</a>
+                                <a href="{{ url_for('delete_password', id=password.id) }}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="empty-state">
+            <p>📝 No passwords saved yet.</p>
+            <a href="{{ url_for('add_password') }}" class="btn">Add Your First Password</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
